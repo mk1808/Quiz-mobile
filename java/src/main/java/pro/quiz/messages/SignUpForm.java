@@ -5,8 +5,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class SignUpForm {
-	 @NotNull
-	    @Size(min = 3, max = 50)
+		@NotNull
 	    private String name;
 
 	    @NotNull
@@ -24,7 +23,13 @@ public class SignUpForm {
 	    @NotNull
 	    @Size(min = 6, max = 40)
 	    private String password;
+	    
+	    @NotNull
+	    private String surname;
+	    private String course;
 
+	    
+	    
 	    public String getName() {
 	        return name;
 	    }
@@ -41,7 +46,23 @@ public class SignUpForm {
 	        this.username = username;
 	    }
 
-	    public String getEmail() {
+	    public String getSurname() {
+			return surname;
+		}
+
+		public void setSurname(String surname) {
+			this.surname = surname;
+		}
+
+		public String getCourse() {
+			return course;
+		}
+
+		public void setCourse(String course) {
+			this.course = course;
+		}
+
+		public String getEmail() {
 	        return email;
 	    }
 
