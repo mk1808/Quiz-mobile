@@ -1,10 +1,13 @@
 package pro.quiz.models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -34,17 +37,26 @@ public class Question {
 	
 	private String image;
 
+	@OneToMany(mappedBy="question")
+	private List <Answer> answers;
+	
+	
 	public Question() {}
 	
-	public Question(Long id, Subject subject, @NotNull String text, String code, String image) {
+
+
+	public Question(Long id, Subject subject, @NotNull String text, String code, 
+			String image, List <Answer> answers ) {
 		super();
 		this.id = id;
 		this.subject = subject;
 		this.text = text;
 		this.code = code;
 		this.image = image;
+		this.answers=answers;
 	}
 
+	
 	public Long getId() {
 		return id;
 	}
@@ -85,6 +97,12 @@ public class Question {
 		this.image = image;
 	}
 
+	public List<Answer> getAnswers() {
+		return answers;
+	}
 
+	public void setAnswers(List<Answer> answers) {
+		this.answers = answers;
+	}
 	
 }
