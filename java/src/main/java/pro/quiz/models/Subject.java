@@ -41,7 +41,7 @@ public class Subject {
 	@NotNull
 	private Boolean limitedTime;
 	
-	private Duration time;
+	private Long time;
 	
 	private String course;
 	
@@ -65,7 +65,7 @@ public class Subject {
 	public Subject(){}
 	
 	public Subject(Long id, @NotNull String name, Long noQuestions, @NotNull Boolean multipleChoice,
-			@NotNull Boolean separatePage, Boolean canBack, @NotNull Boolean limitedTime, Duration time, String course,
+			@NotNull Boolean separatePage, Boolean canBack, @NotNull Boolean limitedTime, Long time, String course,
 			String description, @NotNull Boolean randomize, @NotNull String subject,List<Question> questions,
 			List <UserResult> userResults  ) {
 		super();
@@ -143,11 +143,11 @@ public class Subject {
 		this.limitedTime = limitedTime;
 	}
 
-	public Duration getTime() {
+	public Long getTime() {
 		return time;
 	}
 
-	public void setTime(Duration time) {
+	public void setTime(Long time) {
 		this.time = time;
 	}
 

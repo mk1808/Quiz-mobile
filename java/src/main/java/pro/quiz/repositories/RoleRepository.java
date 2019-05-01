@@ -9,4 +9,5 @@ import pro.quiz.models.RoleName;
 
 public interface RoleRepository extends JpaRepository<Role, Long> {
 	Optional<Role> findByName(RoleName roleName);
+	
 }
