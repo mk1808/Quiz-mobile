@@ -11,4 +11,5 @@ import pro.quiz.models.Subject;
 
 public interface QuestionRepository extends JpaRepository<Question, Long>{
 	List<Question> getQuestionsBySubject(Subject subject);
+	Question getQuestionById(Long id);
 }

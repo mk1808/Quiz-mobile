@@ -6,7 +6,7 @@ INSERT INTO `user_roles` (`role_id`, `user_id`) VALUES ('1', '1');
 INSERT INTO `user_roles` (`role_id`, `user_id`) VALUES ('1', '2');
 INSERT INTO `user_roles` (`role_id`, `user_id`) VALUES ('2', '3');
 
-INSERT INTO `subject` (`id`, `can_back`, `course`, `description`, `limited_time`, `multiple_choice`, `name`, `no_questions`, `randomize`, `separate_page`, `subject`, `time`) VALUES ('1', b'1', NULL, NULL, b'1', b'1', 'quiz1', '6', b'0', b'1', 'web', '10');
+INSERT INTO `subject` (`id`, `can_back`, `course`, `description`, `limited_time`, `multiple_choice`, `name`, `no_questions`, `randomize`, `separate_page`, `subject`, `time`) VALUES ('1', b'1', "demojava", NULL, b'1', b'1', 'quiz1', '6', b'0', b'1', 'web', '10');
 INSERT INTO `subject` (`id`, `can_back`, `course`, `description`, `limited_time`, `multiple_choice`, `name`, `no_questions`, `randomize`, `separate_page`, `subject`, `time`) VALUES ('2', b'1', NULL, NULL, b'1', b'0', 'quiz2', '10', b'0', b'1', 'java', '20');
 
 INSERT INTO `question` (`id`, `code`, `image`, `text`, `subject_id`) VALUES ('1', NULL, NULL, 'pytanie1', '1');
