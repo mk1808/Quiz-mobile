@@ -1,6 +1,8 @@
 package pro.quiz.controllers;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.Valid;
@@ -25,6 +27,7 @@ import pro.quiz.messages.SignUpForm;
 import pro.quiz.models.Role;
 import pro.quiz.models.RoleName;
 import pro.quiz.models.User;
+import pro.quiz.models.UserResult;
 import pro.quiz.repositories.RoleRepository;
 import pro.quiz.repositories.UserRepository;
 import pro.quiz.security.jwt.JwtProvider;
@@ -99,13 +102,16 @@ public class AuthController {
 	                .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
 	        		role=userRole;       			
       	}
+      	List<UserResult> results=new ArrayList<UserResult>();
 	        User user = new User(signUpRequest.getEmail(),
 	        		signUpRequest.getUsername(),
 	                encoder.encode(signUpRequest.getPassword()),
 	                role,
 	                signUpRequest.getName(),
 	                signUpRequest.getSurname(),
-	                signUpRequest.getCourse());
+	                signUpRequest.getCourse(),
+	                results
+	                );
 	        
 	       // user.setRole(role);
 	        userRepository.save(user);

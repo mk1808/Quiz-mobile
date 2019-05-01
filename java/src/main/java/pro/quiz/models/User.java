@@ -72,6 +72,11 @@ public class User {
 	
 	private String course;
 	
+
+	@OneToMany(mappedBy="user")
+	private List <UserResult> userResults;
+
+	
 	public User ()
     {
     }
@@ -83,7 +88,8 @@ public class User {
 	@NotNull Role role, 
 	@NotNull String name, 
 	@NotNull String surname, 
-	String course) {
+	String course,
+	List <UserResult> userResults) {
 		super();
 		
 		this.email = email;
@@ -93,7 +99,28 @@ public class User {
 		this.name = name;
 		this.surname = surname;
 		this.course = course;
+		this.userResults=userResults;
 	}
+	
+	public User(
+			@NotNull @Size(max = 50) @Email String email,
+			@Size(min = 5, max = 20) @NotNull String username,
+			@NotNull @Size(min = 6, max = 100) String password,
+			@NotNull Role role, 
+			@NotNull String name, 
+			@NotNull String surname, 
+			String course) {
+				super();
+				
+				this.email = email;
+				this.username = username;
+				this.password = password;
+				this.role = role;
+				this.name = name;
+				this.surname = surname;
+				this.course = course;
+				
+			}
 /*
 	public User( @NotNull @Size(max = 50) @Email String email,
 			@Size(min = 5, max = 20) @NotNull String username,
@@ -173,7 +200,15 @@ public class User {
 		this.course = course;
 	}
 
+	public List<UserResult> getUserResults() {
+		return userResults;
+	}
 
+	public void setUserResults(List<UserResult> userResults) {
+		this.userResults = userResults;
+	}
+
+	
 
 
 }

@@ -57,13 +57,17 @@ public class Subject {
 	@OneToMany(mappedBy="subject")
 	private List <Question> questions;
 	
+	@OneToMany(mappedBy="subject")
+	private List <UserResult> userResults;
+
 	
 	
 	public Subject(){}
 	
 	public Subject(Long id, @NotNull String name, Long noQuestions, @NotNull Boolean multipleChoice,
 			@NotNull Boolean separatePage, Boolean canBack, @NotNull Boolean limitedTime, Duration time, String course,
-			String description, @NotNull Boolean randomize, @NotNull String subject,List<Question> questions ) {
+			String description, @NotNull Boolean randomize, @NotNull String subject,List<Question> questions,
+			List <UserResult> userResults  ) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -78,6 +82,7 @@ public class Subject {
 		this.randomize = randomize;
 		this.subject = subject;
 		this.questions=questions;
+		this.userResults=userResults;
 	}
 
 
@@ -185,6 +190,15 @@ public class Subject {
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
 	}
+
+	public List<UserResult> getUserResults() {
+		return userResults;
+	}
+
+	public void setUserResults(List<UserResult> userResults) {
+		this.userResults = userResults;
+	}
+	
 	
 
 }
