@@ -36,11 +36,12 @@ public class SubjectServiceImpl implements SubjectService{
 		List<Question> correctQuestions=this.subjectRepository.getSubjectById(subjectId).getQuestions();
 		int total=questions.size();
 		int correct=0;
+		System.out.println(total);
 		Boolean qValue;
 		Float result;
-		for(int i=0; i<total-1; i++) {
+		for(int i=0; i<total; i++) {
 			qValue=true;
-			for (int j=0; j<questions.get(0).getAnswers().size();j++) {
+			for (int j=0; j<questions.get(0).getAnswers().size()-1;j++) {
 				if(correctQuestions.get(i).getAnswers().get(j).getStatus()==
 						questions.get(i).getAnswers().get(j).getStatus()) 
 				{} else { qValue=false;}

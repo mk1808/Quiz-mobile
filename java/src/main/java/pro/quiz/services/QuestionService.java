@@ -8,5 +8,5 @@ import pro.quiz.models.Subject;
 public interface QuestionService {
 	
 	List<Question> getQuestionsBySubject(Subject subject);
-
+	Question createQuestion(Question question);
 }

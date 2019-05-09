@@ -46,7 +46,8 @@ public class Data implements CommandLineRunner{
 		s1.setSeparatePage(false);
 		s1.setSubject("j");
 		subjectRepository.save(s1);
-		
+		*/
+		/*
 		Subject s2=new Subject();
 		s2.setName("Web");
 		s2.setCanBack(true);

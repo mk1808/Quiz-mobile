@@ -2,6 +2,8 @@ package pro.quiz.services.impl;
 
 import org.springframework.stereotype.Service;
 
+import pro.quiz.models.Answer;
+import pro.quiz.models.Question;
 import pro.quiz.repositories.AnswerRepository;
 import pro.quiz.services.AnswerService;
 
@@ -13,6 +15,7 @@ public class AnswerServiceImpl implements AnswerService {
 		super();
 		this.answerRepository = answerRepository;
 	}
+	
 	
 	
 }

@@ -23,4 +23,7 @@ public class QuestionServiceImpl implements QuestionService{
 		return this.questionRepository.getQuestionsBySubject(subject); 
 	}
 	
+	public Question createQuestion(Question question) {
+		return this.questionRepository.save(question);
+	}
 }

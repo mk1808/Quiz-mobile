@@ -1,6 +1,6 @@
-INSERT INTO `user` (`id`, `course`, `email`, `name`, `password`, `surname`, `username`) VALUES ('1', NULL, 'login1@gmail.com', 'Mm', 'login1', 'Kk', 'login1');
-INSERT INTO `user` (`id`, `course`, `email`, `name`, `password`, `surname`, `username`) VALUES ('2', NULL, 'login2@gmail.com', 'Mm', 'login2', 'Kk', 'login2');
-INSERT INTO `user` (`id`, `course`, `email`, `name`, `password`, `surname`, `username`) VALUES ('3', NULL, 'login3@gmail.com', 'Mm', 'login3n', 'Kk', 'login3n');
+INSERT INTO `user` (`id`, `course`, `email`, `name`, `password`, `surname`, `username`) VALUES ('100', NULL, 'login1@gmail.com', 'Mm', 'login1', 'Kk', 'login1');
+INSERT INTO `user` (`id`, `course`, `email`, `name`, `password`, `surname`, `username`) VALUES ('200', NULL, 'login2@gmail.com', 'Mm', 'login2', 'Kk', 'login2');
+INSERT INTO `user` (`id`, `course`, `email`, `name`, `password`, `surname`, `username`) VALUES ('300', NULL, 'login3@gmail.com', 'Mm', 'login3n', 'Kk', 'login3n');
 
 INSERT INTO `user_roles` (`role_id`, `user_id`) VALUES ('1', '1');
 INSERT INTO `user_roles` (`role_id`, `user_id`) VALUES ('1', '2');
@@ -30,18 +30,24 @@ INSERT INTO `answer` (`id`, `status`, `text`, `question_id`) VALUES ('10', b'1',
 INSERT INTO `answer` (`id`, `status`, `text`, `question_id`) VALUES ('11', b'0', 'odpC', '3');
 INSERT INTO `answer` (`id`, `status`, `text`, `question_id`) VALUES ('12', b'1', 'odpD', '3');
 
+
+
 INSERT INTO `answer` (`id`, `status`, `text`, `question_id`) VALUES ('13', b'1', 'odpA', '4');
 INSERT INTO `answer` (`id`, `status`, `text`, `question_id`) VALUES ('14', b'0', 'odpB', '4');
 INSERT INTO `answer` (`id`, `status`, `text`, `question_id`) VALUES ('15', b'0', 'odpC', '4');
 INSERT INTO `answer` (`id`, `status`, `text`, `question_id`) VALUES ('16', b'0', 'odpD', '4');
+
+
 INSERT INTO `answer` (`id`, `status`, `text`, `question_id`) VALUES ('17', b'0', 'odpA', '5');
 INSERT INTO `answer` (`id`, `status`, `text`, `question_id`) VALUES ('18', b'0', 'odpB', '5');
 INSERT INTO `answer` (`id`, `status`, `text`, `question_id`) VALUES ('19', b'1', 'odpC', '5');
 INSERT INTO `answer` (`id`, `status`, `text`, `question_id`) VALUES ('20', b'0', 'odpD', '5');
+
 INSERT INTO `answer` (`id`, `status`, `text`, `question_id`) VALUES ('21', b'0', 'odpA', '6');
 INSERT INTO `answer` (`id`, `status`, `text`, `question_id`) VALUES ('22', b'1', 'odpB', '6');
 INSERT INTO `answer` (`id`, `status`, `text`, `question_id`) VALUES ('23', b'0', 'odpC', '6');
 INSERT INTO `answer` (`id`, `status`, `text`, `question_id`) VALUES ('24', b'0', 'odpD', '6');
+
 INSERT INTO `answer` (`id`, `status`, `text`, `question_id`) VALUES ('25', b'0', 'odpA', '7');
 INSERT INTO `answer` (`id`, `status`, `text`, `question_id`) VALUES ('26', b'1', 'odpB', '7');
 INSERT INTO `answer` (`id`, `status`, `text`, `question_id`) VALUES ('27', b'0', 'odpC', '7');

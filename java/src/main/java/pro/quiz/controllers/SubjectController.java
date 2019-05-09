@@ -107,13 +107,24 @@ private final QuestionRepository questionRepository;
 	
 	@PreAuthorize("hasRole('USER')")
 	@GetMapping("/withAnswers/{id}")
-	ResponseEntity getSubjectByIdWithAnswers(@PathVariable Long id) throws AuthenticationException
+	ResponseEntity getSubjectByIdWithAnswers(@PathVariable Long id) 
 	{
 		
 		Subject subject=this.subjectService.getSubjectById(id);
 		return  ResponseEntity.status(HttpStatus.OK).body(subject);
 	 
 	}
-
 	
+	
+	@PreAuthorize("hasRole('USER')")
+	@PostMapping("/result")
+	ResponseEntity checkAnswersForSubject(@RequestBody List<Question> questions) {
+		Question question=questionRepository.getQuestionById(questions.get(0).getId());
+		
+		questions.get(0).setSubject(question.getSubject());
+		
+			Result result = this.subjectService.checkAnswersForDemo(questions);
+			return ResponseEntity.status(HttpStatus.OK).body(result);
+		
+	}
 }

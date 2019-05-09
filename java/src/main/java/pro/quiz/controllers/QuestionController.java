@@ -7,13 +7,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import pro.quiz.models.Answer;
 import pro.quiz.models.Question;
 import pro.quiz.models.Subject;
+import pro.quiz.services.AnswerService;
 import pro.quiz.services.QuestionService;
 import pro.quiz.services.SubjectService;
+import pro.quiz.services.impl.SubjectServiceImpl.Result;
 
 @RestController
 @RequestMapping("/api/questions")
@@ -21,10 +26,12 @@ public class QuestionController {
 
 private final QuestionService questionService;
 private final SubjectService subjectService;
-	
-	public QuestionController(QuestionService questionService, SubjectService subjectService) {
+private final AnswerService answerService;	
+	public QuestionController(QuestionService questionService, SubjectService subjectService,
+			AnswerService answerService) {
 		this.questionService=questionService;
 		this.subjectService=subjectService;
+		this.answerService=answerService;
 }
 	
 
@@ -43,5 +50,7 @@ private final SubjectService subjectService;
 	}
 	 
 }
+	
+	
 	
 }
