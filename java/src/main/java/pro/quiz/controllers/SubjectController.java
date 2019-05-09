@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -80,6 +81,39 @@ private final QuestionRepository questionRepository;
 			Result result = this.subjectService.checkAnswersForDemo(questions);
 			return ResponseEntity.status(HttpStatus.OK).body(result);
 		}
-	} 
+	}
+	
+	
+	
+	//test-niedemo
+	
+	@PreAuthorize("hasRole('USER')")
+	@GetMapping("/withoutAnswers/{id}")
+	ResponseEntity getSubjectByIdWithoutAnswers(@PathVariable Long id) throws AuthenticationException
+	{
+		
+		Subject subject=this.subjectService.getSubjectById(id);
+	
+		for(Question question:subject.getQuestions()) {
+		for(Answer answer:question.getAnswers()) {
+				answer.setStatus(false);
+			}
+		}
+		return  ResponseEntity.status(HttpStatus.OK).body(subject);
+	
+	 
+	}
+	
+	
+	@PreAuthorize("hasRole('USER')")
+	@GetMapping("/withAnswers/{id}")
+	ResponseEntity getSubjectByIdWithAnswers(@PathVariable Long id) throws AuthenticationException
+	{
+		
+		Subject subject=this.subjectService.getSubjectById(id);
+		return  ResponseEntity.status(HttpStatus.OK).body(subject);
+	 
+	}
+
 	
 }

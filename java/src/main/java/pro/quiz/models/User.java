@@ -48,7 +48,7 @@ public class User {
     @Email
     private String email; 
 	
-	@Size(min=5, max = 20)
+	@Size(min=5, max = 30)
 	@NotNull 
 	private String username;
 	

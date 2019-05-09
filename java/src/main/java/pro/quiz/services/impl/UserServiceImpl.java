@@ -37,6 +37,7 @@ public class UserServiceImpl implements UserService{
 	public  Optional<User> getUserByUsername(String login) {
 		return this.userRepository.getUserByUsername(login);
 	}
+	
 	@Override
 	public Boolean existsByUsername(String login) {
 		return this.userRepository.existsByUsername(login);
@@ -46,5 +47,15 @@ public class UserServiceImpl implements UserService{
 	public Boolean existsByEmail(String mail) {
 		return this.userRepository.existsByEmail(mail);
 	};
+	
+	@Override
+	public User updateUser(User user) {
+		
+		this.userRepository.findById(user.getId());
+		//user.setId(id);
+		return this.userRepository.save(user);
+		
+	}
+	
 }
 
