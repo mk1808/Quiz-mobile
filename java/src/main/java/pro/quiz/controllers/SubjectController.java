@@ -1,5 +1,6 @@
 package pro.quiz.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +37,7 @@ private final QuestionRepository questionRepository;
 		this.subjectService=subjectService;
 		this.questionRepository=questionRepository;
 }
-	
+	//demo
 	@GetMapping("/demo/withoutAnswers/{course}")
 	ResponseEntity getDemoByCourseWithoutAnswers(@PathVariable String course) throws AuthenticationException
 	{
@@ -47,7 +48,7 @@ private final QuestionRepository questionRepository;
 		Subject subject=this.subjectService.getDemoSubjectByCourse(course);
 	
 		for(Question question:subject.getQuestions()) {
-		for(Answer answer:question.getAnswers()) {
+		for(Answer answer:question.getAnswers()) {	
 				answer.setStatus(false);
 			}
 		}
@@ -127,4 +128,18 @@ private final QuestionRepository questionRepository;
 			return ResponseEntity.status(HttpStatus.OK).body(result);
 		
 	}
+	
+
+	@PreAuthorize("hasRole('USER')")
+	@GetMapping("/{course}")
+	ResponseEntity getSubjectsByCourse(@PathVariable String course) 
+	{
+		
+		List<Subject> subjects=new ArrayList<Subject>();
+		subjects=this.subjectService.getSubjectsByCourse(course);
+		return  ResponseEntity.status(HttpStatus.OK).body(subjects);
+	 
+	}
+	
+	
 }

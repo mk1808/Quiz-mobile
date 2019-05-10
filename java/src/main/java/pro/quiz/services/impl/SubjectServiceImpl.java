@@ -58,6 +58,10 @@ public class SubjectServiceImpl implements SubjectService{
 		
 	}
 	
+	public List<Subject> getSubjectsByCourse(String course){
+		return this.subjectRepository.getSubjectsByCourse(course);
+	}
+	
 	public class Result{
 		public int total;
 		public int correct;

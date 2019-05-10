@@ -11,6 +11,7 @@ public interface SubjectService {
 	Subject getDemoSubjectByCourse(String course);
 	Subject getSubjectById(Long id);
 	Result checkAnswersForDemo(List<Question> questions);
+	List<Subject> getSubjectsByCourse(String course);
 	
 	/*
 	Place getPlaceById(Long id);

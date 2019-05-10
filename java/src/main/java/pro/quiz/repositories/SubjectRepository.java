@@ -15,5 +15,6 @@ public interface SubjectRepository extends JpaRepository<Subject, Long>{
 	Subject getSubjectByCourse(String course);
 	Subject getSubjectById(Long id);
 	//Result checkAnswersForDemo(List<Question> questions);
+	List<Subject> getSubjectsByCourse(String course);
 	}
 
