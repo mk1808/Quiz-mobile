@@ -22,6 +22,8 @@ import javax.persistence.JoinColumn;
 
 import org.hibernate.annotations.NaturalId;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
@@ -52,6 +54,7 @@ public class User {
 	@NotNull 
 	private String username;
 	
+	@JsonIgnore
 	@NotNull
 	@Size(min=6, max = 100)
 	private String password;
@@ -60,6 +63,7 @@ public class User {
     @JoinTable(name = "user_roles", 
       joinColumns = @JoinColumn(name = "user_id"), 
       inverseJoinColumns = @JoinColumn(name = "role_id"))
+	
 	@NotNull 
 	private Role role;
 	
@@ -85,6 +89,7 @@ public class User {
 	@NotNull @Size(max = 50) @Email String email,
 	@Size(min = 5, max = 20) @NotNull String username,
 	@NotNull @Size(min = 6, max = 100) String password,
+	
 	@NotNull Role role, 
 	@NotNull String name, 
 	@NotNull String surname, 
@@ -101,6 +106,24 @@ public class User {
 		this.course = course;
 		this.userResults=userResults;
 	}
+	
+	public User(
+			
+			@NotNull @Size(min = 6, max = 100) String password,
+			@NotNull String name, 
+			@NotNull String surname, 
+			String course) {
+				super();
+				
+				
+		
+				this.password = password;
+				this.name = name;
+				this.surname = surname;
+				this.course = course;
+
+			}
+	
 	
 	public User(
 			@NotNull @Size(max = 50) @Email String email,

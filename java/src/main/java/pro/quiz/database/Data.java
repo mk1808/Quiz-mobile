@@ -25,7 +25,7 @@ public class Data implements CommandLineRunner{
 	
 	@Override
 	public void run (String... args) throws Exception{
-		
+	
 		Role r1=new Role();
 		r1.setName(RoleName.ROLE_USER);
 		roleRepository.save(r1);

@@ -2,9 +2,14 @@ package pro.quiz.services.impl;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import pro.quiz.models.Role;
+import pro.quiz.models.RoleName;
 import pro.quiz.models.User;
+import pro.quiz.repositories.RoleRepository;
 import pro.quiz.repositories.UserRepository;
 import pro.quiz.services.UserService;
 
@@ -13,10 +18,15 @@ import pro.quiz.services.UserService;
 public class UserServiceImpl implements UserService{
 	
 	private final UserRepository userRepository;
-	public UserServiceImpl (UserRepository userRepository)
+	private final RoleRepository roleRepository;
+	public UserServiceImpl (UserRepository userRepository, RoleRepository roleRepository)
 	{
 		this.userRepository=userRepository;
+		this.roleRepository=roleRepository;
 	}
+	
+	@Autowired
+    PasswordEncoder encoder;
 	
 	@Override
 	public User createUser(User user) {
@@ -50,10 +60,23 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public User updateUser(User user) {
+		User myUser=this.userRepository.findById(user.getId()).get();
+		System.out.println(user);
+		User partUser= new User(encoder.encode(user.getPassword()), user.getName(), user.getSurname(), user.getCourse());
+	
+		Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
+				   .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
 		
-		this.userRepository.findById(user.getId());
+		partUser.setRole(userRole);
+		partUser.setEmail(user.getEmail());
+		partUser.setId(user.getId());
+		partUser.setUsername(user.getUsername());
+		partUser.setUserResults(user.getUserResults());
+
+		//this.userRepository.findById(user.getId());
 		//user.setId(id);
-		return this.userRepository.save(user);
+		
+		return this.userRepository.save(partUser);
 		
 	}
 	
