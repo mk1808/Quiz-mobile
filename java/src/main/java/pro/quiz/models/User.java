@@ -53,8 +53,8 @@ public class User {
 	@Size(min=5, max = 30)
 	@NotNull 
 	private String username;
-	
-	@JsonIgnore
+
+
 	@NotNull
 	@Size(min=6, max = 100)
 	private String password;
@@ -76,7 +76,9 @@ public class User {
 	
 	private String course;
 	
-
+	@OneToMany(mappedBy="user")
+	private List <Subject> subjects;
+	
 	@OneToMany(mappedBy="user")
 	private List <UserResult> userResults;
 
@@ -94,7 +96,8 @@ public class User {
 	@NotNull String name, 
 	@NotNull String surname, 
 	String course,
-	List <UserResult> userResults) {
+	List <UserResult> userResults,
+	List <Subject> subjects) {
 		super();
 		
 		this.email = email;
@@ -105,6 +108,7 @@ public class User {
 		this.surname = surname;
 		this.course = course;
 		this.userResults=userResults;
+		this.subjects=subjects;
 	}
 	
 	public User(
@@ -231,6 +235,15 @@ public class User {
 		this.userResults = userResults;
 	}
 
+	public List<Subject> getSubjects() {
+		return subjects;
+	}
+
+	public void setSubjects(List<Subject> subjects) {
+		this.subjects = subjects;
+	}
+	
+	
 	
 
 

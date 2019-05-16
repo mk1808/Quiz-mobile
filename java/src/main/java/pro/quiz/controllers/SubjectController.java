@@ -21,8 +21,10 @@ import pro.quiz.messages.SignInForm;
 import pro.quiz.models.Answer;
 import pro.quiz.models.Question;
 import pro.quiz.models.Subject;
+import pro.quiz.models.User;
 import pro.quiz.repositories.QuestionRepository;
 import pro.quiz.services.SubjectService;
+import pro.quiz.services.UserService;
 import pro.quiz.services.impl.SubjectServiceImpl.Result;
 
 @RestController
@@ -31,11 +33,13 @@ public class SubjectController {
 
 private final SubjectService subjectService;
 private final QuestionRepository questionRepository;
+private final UserService userService;
 	
 	public SubjectController(SubjectService subjectService,
-			QuestionRepository questionRepository) {
+			QuestionRepository questionRepository, UserService userService) {
 		this.subjectService=subjectService;
 		this.questionRepository=questionRepository;
+		this.userService=userService;
 }
 	//demo
 	@GetMapping("/demo/withoutAnswers/{course}")
@@ -137,6 +141,17 @@ private final QuestionRepository questionRepository;
 		
 		List<Subject> subjects=new ArrayList<Subject>();
 		subjects=this.subjectService.getSubjectsByCourse(course);
+		return  ResponseEntity.status(HttpStatus.OK).body(subjects);
+	 
+	}
+	
+	@PreAuthorize("hasRole('ADMIN')")
+	@GetMapping("/user/{id}")
+	ResponseEntity getSubjectsByUser(@PathVariable Long id) 
+	{
+		User user = this.userService.getUserById(id);
+		System.out.println("abc");
+		List <Subject> subjects=this.subjectService.getSubjectsByUser(user);
 		return  ResponseEntity.status(HttpStatus.OK).body(subjects);
 	 
 	}

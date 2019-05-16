@@ -6,9 +6,13 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -59,6 +63,11 @@ public class Subject {
 	
 	@OneToMany(mappedBy="subject")
 	private List <UserResult> userResults;
+	
+	@JsonIgnore
+	@ManyToOne
+    @JoinColumn(name="user_id")
+	private User user;
 
 	
 	
@@ -67,7 +76,7 @@ public class Subject {
 	public Subject(Long id, @NotNull String name, Long noQuestions, @NotNull Boolean multipleChoice,
 			@NotNull Boolean separatePage, Boolean canBack, @NotNull Boolean limitedTime, Long time, String course,
 			String description, @NotNull Boolean randomize, @NotNull String subject,List<Question> questions,
-			List <UserResult> userResults  ) {
+			List <UserResult> userResults, User user  ) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -83,6 +92,7 @@ public class Subject {
 		this.subject = subject;
 		this.questions=questions;
 		this.userResults=userResults;
+		this.user=user;
 	}
 
 
@@ -198,6 +208,15 @@ public class Subject {
 	public void setUserResults(List<UserResult> userResults) {
 		this.userResults = userResults;
 	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 	
 	
 

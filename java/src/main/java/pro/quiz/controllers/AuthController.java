@@ -26,6 +26,7 @@ import pro.quiz.messages.SignInForm;
 import pro.quiz.messages.SignUpForm;
 import pro.quiz.models.Role;
 import pro.quiz.models.RoleName;
+import pro.quiz.models.Subject;
 import pro.quiz.models.User;
 import pro.quiz.models.UserResult;
 import pro.quiz.repositories.RoleRepository;
@@ -103,6 +104,7 @@ public class AuthController {
 	        		role=userRole;       			
       	}
       	List<UserResult> results=new ArrayList<UserResult>();
+      	List<Subject> subjects=new ArrayList<Subject>();
 	        User user = new User(signUpRequest.getEmail(),
 	        		signUpRequest.getUsername(),
 	                encoder.encode(signUpRequest.getPassword()),
@@ -110,7 +112,8 @@ public class AuthController {
 	                signUpRequest.getName(),
 	                signUpRequest.getSurname(),
 	                signUpRequest.getCourse(),
-	                results
+	                results,
+	                subjects
 	                );
 	        
 	       // user.setRole(role);

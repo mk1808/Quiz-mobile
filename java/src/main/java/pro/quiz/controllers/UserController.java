@@ -29,7 +29,7 @@ private final UserService userService;
 		this.userService=userService;
 }
 	
-	@PreAuthorize("hasRole('USER')")
+	//@PreAuthorize("hasRole('USER')")
 	@PutMapping("/update")
 	ResponseEntity updateUser(@RequestBody User user) {
 		

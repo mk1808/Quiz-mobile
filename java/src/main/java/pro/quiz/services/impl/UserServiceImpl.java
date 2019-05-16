@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User updateUser(User user) {
 		User myUser=this.userRepository.findById(user.getId()).get();
-		System.out.println(user);
+		System.out.println(user.getPassword());
 		User partUser= new User(encoder.encode(user.getPassword()), user.getName(), user.getSurname(), user.getCourse());
 	
 		Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
@@ -76,8 +76,9 @@ public class UserServiceImpl implements UserService{
 		//this.userRepository.findById(user.getId());
 		//user.setId(id);
 		
-		return this.userRepository.save(partUser);
-		
+		this.userRepository.save(partUser);
+		partUser.setPassword("");
+		return partUser; 
 	}
 	
 }

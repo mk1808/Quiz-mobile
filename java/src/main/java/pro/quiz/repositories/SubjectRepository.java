@@ -9,6 +9,7 @@ import pro.quiz.models.Question;
 import pro.quiz.models.Role;
 import pro.quiz.models.RoleName;
 import pro.quiz.models.Subject;
+import pro.quiz.models.User;
 import pro.quiz.services.impl.SubjectServiceImpl.Result;
 
 public interface SubjectRepository extends JpaRepository<Subject, Long>{
@@ -16,5 +17,6 @@ public interface SubjectRepository extends JpaRepository<Subject, Long>{
 	Subject getSubjectById(Long id);
 	//Result checkAnswersForDemo(List<Question> questions);
 	List<Subject> getSubjectsByCourse(String course);
+	List<Subject> getSubjectsByUser(User user);
 	}
 

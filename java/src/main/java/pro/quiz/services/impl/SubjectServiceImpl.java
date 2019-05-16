@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import pro.quiz.models.Question;
 import pro.quiz.models.Subject;
+import pro.quiz.models.User;
 import pro.quiz.repositories.SubjectRepository;
 import pro.quiz.repositories.UserRepository;
 import pro.quiz.services.SubjectService;
@@ -61,6 +62,12 @@ public class SubjectServiceImpl implements SubjectService{
 	public List<Subject> getSubjectsByCourse(String course){
 		return this.subjectRepository.getSubjectsByCourse(course);
 	}
+	
+	public List<Subject> getSubjectsByUser(User user){
+		return this.subjectRepository.getSubjectsByUser(user);
+	}
+	
+	
 	
 	public class Result{
 		public int total;

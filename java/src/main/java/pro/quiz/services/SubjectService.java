@@ -4,6 +4,7 @@ import java.util.List;
 
 import pro.quiz.models.Question;
 import pro.quiz.models.Subject;
+import pro.quiz.models.User;
 import pro.quiz.services.impl.SubjectServiceImpl.Result;
 
 public interface SubjectService {
@@ -12,7 +13,7 @@ public interface SubjectService {
 	Subject getSubjectById(Long id);
 	Result checkAnswersForDemo(List<Question> questions);
 	List<Subject> getSubjectsByCourse(String course);
-	
+	List<Subject> getSubjectsByUser(User user);
 	/*
 	Place getPlaceById(Long id);
 	List<Place> getPlaces();
