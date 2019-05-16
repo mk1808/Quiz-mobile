@@ -159,4 +159,16 @@ private final UserService userService;
 	}
 	
 	
+
+	@PreAuthorize("hasRole('ADMIN')")
+	@GetMapping("/admin/withAnswers/{id}")
+	ResponseEntity getSubjectByIdWithAnswersForAdmin(@PathVariable Long id) 
+	{
+		
+		Subject subject=this.subjectService.getSubjectById(id);
+		return  ResponseEntity.status(HttpStatus.OK).body(subject);
+	 
+	}
+	
+	
 }	
