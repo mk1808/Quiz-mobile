@@ -145,6 +145,8 @@ private final UserService userService;
 	 
 	}
 	
+	
+	/////admin
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/user/{id}")
 	ResponseEntity getSubjectsByUser(@PathVariable Long id) 
