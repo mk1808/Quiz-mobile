@@ -1,4 +1,6 @@
 package pro.quiz.models;
+import java.io.IOException;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,14 +12,22 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.NaturalId;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+
 @Entity
 @Table(name = "roles")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
- 
-    
+
+
     @Enumerated(EnumType.STRING)
     @NaturalId
     @Column(length = 60)
@@ -44,6 +54,7 @@ public class Role {
         this.id = id;
     }
  
+    @JsonValue
     public RoleName getName() {
         return name;
     }
@@ -51,6 +62,7 @@ public class Role {
     public void setName(RoleName name) {
         this.name = name;
     }
+
 
 	
 }

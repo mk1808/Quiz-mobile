@@ -20,10 +20,10 @@ import java.util.Optional;
 @Component
 public class JwtProvider {
 	
-/*	private final UserService userService;
+	private final UserService userService;
 	public  JwtProvider(UserService userService) {
 		this.userService=userService;
-}*/
+}
 
     private static final Logger logger = LoggerFactory.getLogger(JwtProvider.class);
 
@@ -37,10 +37,11 @@ public class JwtProvider {
 
         UserPrinciple userPrincipal = (UserPrinciple) authentication.getPrincipal();
         
-   /*     Optional<User> myUser =this.userService.getUserByUsername(userPrincipal.getUsername());*/
+       Optional<User> myUser =this.userService.getUserByUsername(userPrincipal.getUsername());
+       myUser.orElse(null).setPassword("");
         return Jwts.builder()
 		                .setSubject((userPrincipal.getUsername()))
-		               // .claim("user",myUser.orElse(null)  )
+		                .claim("user",myUser.orElse(null)  )
 		                .setIssuedAt(new Date())
 		                .setExpiration(new Date((new Date()).getTime() + jwtExpiration*1000))
 		                .signWith(SignatureAlgorithm.HS512, jwtSecret)
