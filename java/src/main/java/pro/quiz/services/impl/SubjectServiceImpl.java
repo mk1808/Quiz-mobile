@@ -42,7 +42,7 @@ public class SubjectServiceImpl implements SubjectService{
 		Float result;
 		for(int i=0; i<total; i++) {
 			qValue=true;
-			for (int j=0; j<questions.get(0).getAnswers().size()-1;j++) {
+			for (int j=0; j<questions.get(0).getAnswers().size();j++) {
 				if(correctQuestions.get(i).getAnswers().get(j).getStatus()==
 						questions.get(i).getAnswers().get(j).getStatus()) 
 				{} else { qValue=false;}

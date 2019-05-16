@@ -2,6 +2,8 @@ package pro.quiz.security.jwt;
 
 
 import io.jsonwebtoken.*;
+import pro.quiz.models.User;
+import pro.quiz.services.UserService;
 import pro.quiz.services.impl.UserPrinciple;
 
 import org.slf4j.Logger;
@@ -13,9 +15,15 @@ import org.springframework.stereotype.Component;
 
 
 import java.util.Date;
+import java.util.Optional;
 
 @Component
 public class JwtProvider {
+	
+/*	private final UserService userService;
+	public  JwtProvider(UserService userService) {
+		this.userService=userService;
+}*/
 
     private static final Logger logger = LoggerFactory.getLogger(JwtProvider.class);
 
@@ -28,9 +36,11 @@ public class JwtProvider {
     public String generateJwtToken(Authentication authentication) {
 
         UserPrinciple userPrincipal = (UserPrinciple) authentication.getPrincipal();
-
+        
+   /*     Optional<User> myUser =this.userService.getUserByUsername(userPrincipal.getUsername());*/
         return Jwts.builder()
 		                .setSubject((userPrincipal.getUsername()))
+		               // .claim("user",myUser.orElse(null)  )
 		                .setIssuedAt(new Date())
 		                .setExpiration(new Date((new Date()).getTime() + jwtExpiration*1000))
 		                .signWith(SignatureAlgorithm.HS512, jwtSecret)

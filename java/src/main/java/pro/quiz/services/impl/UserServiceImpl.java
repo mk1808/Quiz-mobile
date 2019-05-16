@@ -48,6 +48,8 @@ public class UserServiceImpl implements UserService{
 		return this.userRepository.getUserByUsername(login);
 	}
 	
+	
+	
 	@Override
 	public Boolean existsByUsername(String login) {
 		return this.userRepository.existsByUsername(login);
