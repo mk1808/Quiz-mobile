@@ -15,7 +15,7 @@ public interface SubjectService {
 	List<Subject> getSubjectsByCourse(String course);
 	List<Subject> getSubjectsByUser(User user);
 	String deleteSubject(Long id);
-	
+	Subject createSubject(Subject subject);
 	/*
 	Place getPlaceById(Long id);
 	List<Place> getPlaces();

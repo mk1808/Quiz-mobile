@@ -214,4 +214,10 @@ private final AnswerRepository answerRepository;
 		else return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("nie znaleziono");
 	}
 	
+	@PreAuthorize("hasRole('ADMIN')")
+	@PostMapping("/create")
+	ResponseEntity createSubject(@RequestBody Subject subject) {
+		Subject newSubject = this.subjectService.createSubject(subject);
+		return ResponseEntity.status(HttpStatus.OK).body(newSubject);
+	}
 }	

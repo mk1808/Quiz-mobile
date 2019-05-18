@@ -57,8 +57,8 @@ INSERT INTO `answer` (`id`, `status`, `text`, `question_id`) VALUES ('26', b'1',
 INSERT INTO `answer` (`id`, `status`, `text`, `question_id`) VALUES ('27', b'0', 'odpC', '7');
 INSERT INTO `answer` (`id`, `status`, `text`, `question_id`) VALUES ('28', b'0', 'odpD', '7');
 
-INSERT INTO `user_result` (`id`, `result`, `subject_id`, `user_id`) VALUES ('1', '0.1', '1', '1');
-INSERT INTO `user_result` (`id`, `result`, `subject_id`, `user_id`) VALUES ('2', '0.9', '2', '1');
-INSERT INTO `user_result` (`id`, `result`, `subject_id`, `user_id`) VALUES ('3', '0.76', '1', '2');
-INSERT INTO `user_result` (`id`, `result`, `subject_id`, `user_id`) VALUES ('4', '0.44', '2', '2');
+INSERT INTO `user_result` (`id`, `result`, `subject_id`, `user_id`) VALUES ('1', '0.1', '1', '100');
+INSERT INTO `user_result` (`id`, `result`, `subject_id`, `user_id`) VALUES ('2', '0.9', '2', '100');
+INSERT INTO `user_result` (`id`, `result`, `subject_id`, `user_id`) VALUES ('3', '0.76', '1', '200');
+INSERT INTO `user_result` (`id`, `result`, `subject_id`, `user_id`) VALUES ('4', '0.44', '2', '200');
 

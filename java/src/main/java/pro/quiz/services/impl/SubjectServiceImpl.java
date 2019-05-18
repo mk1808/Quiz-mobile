@@ -72,6 +72,10 @@ public class SubjectServiceImpl implements SubjectService{
 		return "deleted";
 	}
 	
+	public Subject createSubject(Subject subject) {
+		return this.subjectRepository.save(subject);
+	}
+	
 	public class Result{
 		public int total;
 		public int correct;
