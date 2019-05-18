@@ -39,8 +39,8 @@ private final UserService userService;
 			return ResponseEntity.status(HttpStatus.OK).body(myUser);
 		
 	}
-	
-	//@PreAuthorize("hasRole('USER')")
+	///admin
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/{id}")
 	ResponseEntity getUser(@PathVariable Long id) {
 			
@@ -50,5 +50,7 @@ private final UserService userService;
 	}
 	
 	/////admin
+	
+	
 	
 }
