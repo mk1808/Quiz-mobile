@@ -8,6 +8,7 @@ import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,10 @@ import pro.quiz.models.Answer;
 import pro.quiz.models.Question;
 import pro.quiz.models.Subject;
 import pro.quiz.models.User;
+import pro.quiz.repositories.AnswerRepository;
 import pro.quiz.repositories.QuestionRepository;
+import pro.quiz.services.AnswerService;
+import pro.quiz.services.QuestionService;
 import pro.quiz.services.SubjectService;
 import pro.quiz.services.UserService;
 import pro.quiz.services.impl.SubjectServiceImpl.Result;
@@ -34,12 +38,19 @@ public class SubjectController {
 private final SubjectService subjectService;
 private final QuestionRepository questionRepository;
 private final UserService userService;
+private final QuestionService questionService;
+private final AnswerService answerService;
+private final AnswerRepository answerRepository;
 	
 	public SubjectController(SubjectService subjectService,
-			QuestionRepository questionRepository, UserService userService) {
+			QuestionRepository questionRepository, UserService userService,
+			AnswerRepository answerRepository, QuestionService questionService, AnswerService answerService ) {
 		this.subjectService=subjectService;
 		this.questionRepository=questionRepository;
 		this.userService=userService;
+		this.answerRepository=answerRepository;
+		this.questionService=questionService;
+		this.answerService=answerService;
 }
 	//demo
 	@GetMapping("/demo/withoutAnswers/{course}")
@@ -170,5 +181,37 @@ private final UserService userService;
 	 
 	}
 	
+	@PreAuthorize("hasRole('ADMIN')")
+	@DeleteMapping("/{id}")
+	ResponseEntity deleteSubjectById(@PathVariable Long id)  
+	{
+		
+		Subject subject=this.subjectService.getSubjectById(id);
+		String response=new String();
+		if (subject!=null) {
+		List<Question> questions = this.questionRepository.getQuestionsBySubject(subject);
+		List <Answer> answers = new ArrayList<Answer>();
+		for (int i=0; i<questions.size(); i++) {
+			List <Answer> singleAnswers=this.answerRepository.getAnswersByQuestion(questions.get(i));
+			for (int j=0; j<singleAnswers.size(); j++) {
+				answers.add(singleAnswers.get(j));
+			}
+		}
+		
+		
+		for(Answer a:answers) {
+			this.answerService.deleteAnswer(a.getId());
+		};
+		
+		for(Question q:questions) {
+			this.questionService.deleteQuestion(q.getId());
+		};
+		
+		
+		response=this.subjectService.deleteSubject(id);
+		return  ResponseEntity.status(HttpStatus.OK).body(response);
+		}
+		else return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("nie znaleziono");
+	}
 	
 }	

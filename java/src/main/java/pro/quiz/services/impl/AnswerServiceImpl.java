@@ -16,6 +16,11 @@ public class AnswerServiceImpl implements AnswerService {
 		this.answerRepository = answerRepository;
 	}
 	
+	public String deleteAnswer(Long id) 
+	{
+		this.answerRepository.deleteById(id);
+		return "deleted";
+	}
 	
 	
 }

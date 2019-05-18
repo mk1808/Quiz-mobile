@@ -14,6 +14,8 @@ public interface SubjectService {
 	Result checkAnswersForDemo(List<Question> questions);
 	List<Subject> getSubjectsByCourse(String course);
 	List<Subject> getSubjectsByUser(User user);
+	String deleteSubject(Long id);
+	
 	/*
 	Place getPlaceById(Long id);
 	List<Place> getPlaces();

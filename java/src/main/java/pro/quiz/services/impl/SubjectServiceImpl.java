@@ -67,7 +67,10 @@ public class SubjectServiceImpl implements SubjectService{
 		return this.subjectRepository.getSubjectsByUser(user);
 	}
 	
-	
+	public String deleteSubject(Long id) {
+		this.subjectRepository.deleteById(id);
+		return "deleted";
+	}
 	
 	public class Result{
 		public int total;

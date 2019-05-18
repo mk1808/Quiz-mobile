@@ -5,6 +5,6 @@ import pro.quiz.models.Question;
 
 public interface AnswerService {
 	
-	
+	String deleteAnswer(Long id);
 
 }

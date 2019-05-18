@@ -32,4 +32,11 @@ public class QuestionServiceImpl implements QuestionService{
 		return this.questionRepository.getQuestionById(id);
 	}
 	
+	public String deleteQuestion(Long id) 
+	{
+		this.questionRepository.deleteById(id);
+		return "deleted";
+		
+	}
+	
 }

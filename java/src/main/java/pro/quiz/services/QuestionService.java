@@ -10,4 +10,5 @@ public interface QuestionService {
 	List<Question> getQuestionsBySubject(Subject subject);
 	Question createQuestion(Question question);
 	Question getQuestionById(Long id);
+	String deleteQuestion(Long id);
 }
