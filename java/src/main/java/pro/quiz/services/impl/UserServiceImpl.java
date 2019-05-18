@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService{
 		partUser.setId(user.getId());
 		partUser.setUsername(user.getUsername());
 		partUser.setUserResults(user.getUserResults());
-		if(user.getPassword().isEmpty()) { partUser.setPassword(encoder.encode(myUser.getPassword()));}
+		if(user.getPassword().length()<1) { partUser.setPassword(encoder.encode(myUser.getPassword()));}
 		
 		this.userRepository.save(partUser);
 		partUser.setPassword("");
