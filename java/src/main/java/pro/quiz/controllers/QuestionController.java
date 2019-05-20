@@ -62,7 +62,13 @@ private final AnswerService answerService;
 	 
 	}
 	
-	
-	
+	@PreAuthorize("hasRole('ADMIN')")
+	@PostMapping("/create")
+	ResponseEntity createQuestion(@RequestBody Question question) {
+		Subject subject = this.subjectService.getSubjectById(question.getSubject().getId());
+		question.setSubject(subject);
+		Question newQuestion = this.questionService.createQuestion( question);
+		return ResponseEntity.status(HttpStatus.OK).body(newQuestion);
+	}
 	
 }

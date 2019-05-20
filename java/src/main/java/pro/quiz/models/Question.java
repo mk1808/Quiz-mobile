@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import lombok.Data;
 
@@ -25,7 +26,7 @@ public class Question {
 	@GeneratedValue 
 	private Long id; 
 	
-	@JsonIgnore
+	
 	@ManyToOne
     @JoinColumn(name="subject_id")
 	private Subject subject;
@@ -65,6 +66,7 @@ public class Question {
 		this.id = id;
 	}
 
+    @JsonValue
 	public Subject getSubject() {
 		return subject;
 	}
