@@ -12,21 +12,23 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import lombok.Data;
+import pro.quiz.deserializers.QuestionDeserializer;
 
 @Data
 @Entity
 @Table(name = "Question")
 
+@JsonDeserialize(using = QuestionDeserializer.class)
 public class Question {
 
 	@Id 
 	@GeneratedValue 
 	private Long id; 
 	
-	
+	@JsonIgnore
 	@ManyToOne
     @JoinColumn(name="subject_id")
 	private Subject subject;
@@ -66,7 +68,6 @@ public class Question {
 		this.id = id;
 	}
 
-    @JsonValue
 	public Subject getSubject() {
 		return subject;
 	}
