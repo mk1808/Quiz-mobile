@@ -65,9 +65,14 @@ private final AnswerService answerService;
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/create")
 	ResponseEntity createQuestion(@RequestBody Question question) {
-		Subject subject = this.subjectService.getSubjectById(question.getSubject().getId());
-		question.setSubject(subject);
-		Question newQuestion = this.questionService.createQuestion( question);
+		//Subject subject = this.subjectService.getSubjectById(question.getSubject().getId());
+		//question.setSubject(subject);
+		
+		for (Answer answer:question.getAnswers() ) {
+			answer.setQuestion(question);
+			System.out.println(answer.getText());
+		}Question newQuestion = this.questionService.createQuestion(question);
+		//Question newestQuestion = this.questionService.getQuestionById(newQuestion.getId());
 		return ResponseEntity.status(HttpStatus.OK).body(newQuestion);
 	}
 	

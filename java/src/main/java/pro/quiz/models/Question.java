@@ -2,6 +2,7 @@ package pro.quiz.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,14 +14,17 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.Data;
-import pro.quiz.deserializers.QuestionDeserializer;
+import pro.quiz.serializers.QuestionDeserializer;
+import pro.quiz.serializers.QuestionSerializer;
 
 @Data
 @Entity
 @Table(name = "Question")
 
+@JsonSerialize(using = QuestionSerializer.class)
 @JsonDeserialize(using = QuestionDeserializer.class)
 public class Question {
 
@@ -28,7 +32,7 @@ public class Question {
 	@GeneratedValue 
 	private Long id; 
 	
-	@JsonIgnore
+	//@JsonIgnore
 	@ManyToOne
     @JoinColumn(name="subject_id")
 	private Subject subject;
@@ -40,7 +44,9 @@ public class Question {
 	
 	private String image;
 
-	@OneToMany(mappedBy="question")
+
+
+	@OneToMany(mappedBy="question",cascade=CascadeType.ALL)
 	private List <Answer> answers;
 	
 	

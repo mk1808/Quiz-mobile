@@ -77,6 +77,7 @@ public class User {
 	
 	private String course;
 	
+	
 	@OneToMany(mappedBy="user")
 	private List <Subject> subjects;
 	

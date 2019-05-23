@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.ResponseEntity;
 
 import pro.quiz.messages.SignInForm;
+import pro.quiz.messages.SubjectForm;
 import pro.quiz.models.Answer;
 import pro.quiz.models.Question;
 import pro.quiz.models.Subject;
@@ -29,6 +30,7 @@ import pro.quiz.services.AnswerService;
 import pro.quiz.services.QuestionService;
 import pro.quiz.services.SubjectService;
 import pro.quiz.services.UserService;
+import pro.quiz.services.impl.UserPrinciple;
 import pro.quiz.services.impl.SubjectServiceImpl.Result;
 
 @RestController
@@ -217,7 +219,45 @@ private final AnswerRepository answerRepository;
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/create")
 	ResponseEntity createSubject(@RequestBody Subject subject) {
+		// UserPrinciple userPrincipal = (UserPrinciple) authentication.getPrincipal();
+	      
 		Subject newSubject = this.subjectService.createSubject(subject);
 		return ResponseEntity.status(HttpStatus.OK).body(newSubject);
 	}
+	
+	
+	//////experymenty
+	@PreAuthorize("hasRole('ADMIN')")
+	@PostMapping("/create/test")
+	ResponseEntity createSubject(@RequestBody SubjectForm subjectForm) {
+		// UserPrinciple userPrincipal = (UserPrinciple) authentication.getPrincipal();
+	    User user=new User();
+	    user=userService.getUserById(subjectForm.getUserId());
+	  //  Subject newSubject=subjectForm;
+	//  newSubject.setUser(user);
+	    Subject newSubject= new Subject(
+	    		null,
+	    		subjectForm.getName(),
+	    		subjectForm.getNoQuestions(),
+	    		subjectForm.getMultipleChoice(),
+	    		subjectForm.getSeparatePage(),
+	    		subjectForm.getCanBack(),
+	    		subjectForm.getLimitedTime(),
+	    		subjectForm.getTime(),
+	    		subjectForm.getCourse(),
+	    		subjectForm.getDescription(),
+	    		subjectForm.getRandomize(),
+	    		subjectForm.getSubject(),
+	    		subjectForm.getQuestions(),
+	    		subjectForm.getUserResults(),
+	    		user);
+	    		
+		Subject mySubject = this.subjectService.createSubject(newSubject);
+		subjectForm.setId(mySubject.getId());
+		return ResponseEntity.status(HttpStatus.OK).body(subjectForm);
+	}
+	
+	
+	
+	
 }	

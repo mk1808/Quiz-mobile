@@ -1,4 +1,4 @@
-package pro.quiz.deserializers;
+package pro.quiz.serializers;
 
 
 import java.io.IOException;
@@ -43,13 +43,27 @@ public class QuestionDeserializer extends StdDeserializer<Question>{
 	public Question deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException{
 		JsonNode node=jp.getCodec().readTree(jp);
 		ObjectMapper jsonObjectMapper=new ObjectMapper();
-		int id = (Integer)((IntNode)node.get("id")).intValue();
-		int subject = (Integer)((IntNode)node.get("idSubject")).intValue();
-
+		int id=-1;
+		if (node.get("id").canConvertToInt())
+		id = (Integer)((IntNode)node.get("id")).intValue();
+		
+		int subject=1;
+		if(node.get("idSubject").canConvertToInt())
+		subject = (Integer)((IntNode)node.get("idSubject")).intValue();
 
 		String text = (String)(node.get("text")).asText();
-		String code = (String)(node.get("code")).asText();
-		String image = (String)(node.get("image")).asText();
+		
+
+		String code=null;
+		if(node.get("code").isNull()) { code=null;}
+		else {code = (String)(node.get("code")).asText();}
+		
+		
+
+		String image=null;
+		if(node.get("image").isNull()) { image=null;}
+		else {image = (String)(node.get("image")).asText();}
+		
 		List <Answer> answers= new ArrayList<Answer>();
 				
 		final JsonNode arrNode=new ObjectMapper().readTree(node.toString()).get("answers");
@@ -59,8 +73,6 @@ public class QuestionDeserializer extends StdDeserializer<Question>{
 				Answer answer = jsonObjectMapper.treeToValue(objectNode, Answer.class);
 				answers.add(answer);
 			}
-			
-			
 		}
 		
 		Subject subjectObiect = this.subjectService.getSubjectById(Long.valueOf(subject));

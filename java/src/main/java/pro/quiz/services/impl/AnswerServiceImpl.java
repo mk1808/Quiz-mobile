@@ -16,6 +16,11 @@ public class AnswerServiceImpl implements AnswerService {
 		this.answerRepository = answerRepository;
 	}
 	
+	public Answer createAnswer(Answer answer) {
+		return this.answerRepository.save(answer);
+	}
+	
+	
 	public String deleteAnswer(Long id) 
 	{
 		this.answerRepository.deleteById(id);

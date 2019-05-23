@@ -27,7 +27,7 @@ public class Answer {
 	@NotNull
 	private Boolean status;
 	
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToOne
     @JoinColumn(name="question_id")
 	private Question question;
