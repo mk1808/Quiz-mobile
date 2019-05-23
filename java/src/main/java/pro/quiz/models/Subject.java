@@ -1,8 +1,8 @@
 package pro.quiz.models;
 
-import java.time.Duration;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,13 +12,20 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.Data;
+import pro.quiz.serializers.SubjectDeserializer;
+import pro.quiz.serializers.SubjectSerializer;
+
 
 @Data
 @Entity
 @Table(name = "Subject")
+
+@JsonSerialize(using = SubjectSerializer.class)
+@JsonDeserialize(using = SubjectDeserializer.class)
 public class Subject {
 
 	@Id 
@@ -58,13 +65,13 @@ public class Subject {
 	private String subject;
 
 
-	@OneToMany(mappedBy="subject")
+	@OneToMany(mappedBy="subject", cascade=CascadeType.ALL)
 	private List <Question> questions;
 	
-	@OneToMany(mappedBy="subject")
+	@OneToMany(mappedBy="subject",cascade=CascadeType.ALL)
 	private List <UserResult> userResults;
 	
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToOne
     @JoinColumn(name="user_id")
 	private User user;
