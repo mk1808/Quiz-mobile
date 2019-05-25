@@ -9,13 +9,23 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.Data;
+import pro.quiz.serializers.UserDeserializer;
+import pro.quiz.serializers.UserResultDeserializer;
+import pro.quiz.serializers.UserResultSerializer;
+import pro.quiz.serializers.UserSerializer;
 
 
 @Data
 @Entity
 @Table(name = "UserResult")
+
+@JsonSerialize(using = UserResultSerializer.class)
+@JsonDeserialize(using = UserResultDeserializer.class)
+
 
 public class UserResult {
 

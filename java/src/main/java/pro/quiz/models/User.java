@@ -1,8 +1,6 @@
 package pro.quiz.models;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +8,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -23,8 +20,14 @@ import javax.persistence.JoinColumn;
 import org.hibernate.annotations.NaturalId;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.Data;
+import pro.quiz.serializers.SubjectDeserializer;
+import pro.quiz.serializers.SubjectSerializer;
+import pro.quiz.serializers.UserDeserializer;
+import pro.quiz.serializers.UserSerializer;
 
 @Data
 @Entity
@@ -36,6 +39,9 @@ import lombok.Data;
             "email"
         })
 })
+
+@JsonSerialize(using = UserSerializer.class)
+@JsonDeserialize(using = UserDeserializer.class)
 public class User {
 	
 
@@ -89,6 +95,27 @@ public class User {
     {
     }
 	
+	
+	
+	public User(Long id, @NotNull @Size(max = 50) @Email String email,
+			@Size(min = 5, max = 30) @NotNull String username, @NotNull @Size(min = 6, max = 100) String password,
+			@NotNull Role role, @NotNull String name, @NotNull String surname, String course, List<Subject> subjects,
+			List<UserResult> userResults) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.username = username;
+		this.password = password;
+		this.role = role;
+		this.name = name;
+		this.surname = surname;
+		this.course = course;
+		this.subjects = subjects;
+		this.userResults = userResults;
+	}
+
+
+
 	public User(
 	@NotNull @Size(max = 50) @Email String email,
 	@Size(min = 5, max = 20) @NotNull String username,

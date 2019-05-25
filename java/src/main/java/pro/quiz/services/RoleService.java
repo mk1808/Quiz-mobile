@@ -7,5 +7,6 @@ import pro.quiz.models.RoleName;
 
 public interface RoleService {
 	
-	Optional<Role> findByName(RoleName roleName);
+	//Optional<Role> findByName(RoleName roleName);
+	Role findByNameNotOptional(RoleName roleName);
 }
