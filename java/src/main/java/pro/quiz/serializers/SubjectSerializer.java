@@ -106,6 +106,7 @@ public class SubjectSerializer extends StdSerializer<Subject> {
 		jgen.writeEndArray();
 
 		jgen.writeEndObject();
+	
 		
 		
 }

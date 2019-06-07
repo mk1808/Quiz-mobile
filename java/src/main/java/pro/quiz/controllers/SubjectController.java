@@ -89,9 +89,14 @@ private final AnswerRepository answerRepository;
 	
 	@PostMapping("/demo/result")
 	ResponseEntity checkAnswersForDemo(@RequestBody List<Question> questions) throws AuthenticationException{
-		Question question=questionRepository.getQuestionById(questions.get(0).getId());
-		String course=question.getSubject().getCourse();
-		questions.get(0).setSubject(question.getSubject());
+	//	Question question=questionRepository.getQuestionById(questions.get(0).getId());
+		String course=questions.get(0).getSubject().getCourse();
+		
+	//questions.get(0).setSubject(question.getSubject());
+	//questions.get(1).setSubject(question.getSubject());
+	//questions.get(2).setSubject(question.getSubject());
+	//questions.get(3).setSubject(question.getSubject());
+	
 		if(!course.equals("demoweb")&&!course.equals("demojava")) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("brak dostepu");
 		

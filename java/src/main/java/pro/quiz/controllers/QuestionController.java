@@ -76,4 +76,24 @@ private final AnswerService answerService;
 		return ResponseEntity.status(HttpStatus.OK).body(newQuestion);
 	}
 	
+	@PostMapping("/demo/result")
+	ResponseEntity checkAnswersForDemo(@RequestBody List<Question> questions) throws AuthenticationException{
+	//	Question question=questionRepository.getQuestionById(questions.get(0).getId());
+		String course=questions.get(0).getSubject().getCourse();
+		System.out.println(course);
+		//course="demojava";
+		
+	//questions.get(0).setSubject(question.getSubject());
+	//questions.get(1).setSubject(question.getSubject());
+	//questions.get(2).setSubject(question.getSubject());
+	//questions.get(3).setSubject(question.getSubject());
+	
+		if(!course.equals("demoweb")&&!course.equals("demojava")) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("brak dostepu");
+		
+		} else {
+			Result result = this.subjectService.checkAnswersForDemo(questions);
+			return ResponseEntity.status(HttpStatus.OK).body(result);
+		}
+	}
 }
