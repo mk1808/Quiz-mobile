@@ -55,7 +55,7 @@ public class QuestionDeserializer extends StdDeserializer<Question>{
 		
 
 		String code=null;
-		if(node.has("code")&&node.get("code")!=null) {
+		if(node.has("code")) {
 		if(node.get("code").isNull()) { code=null;}
 		else {code = (String)(node.get("code")).asText();}
 		}

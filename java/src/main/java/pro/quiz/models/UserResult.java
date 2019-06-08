@@ -36,13 +36,11 @@ public class UserResult {
 	@NotNull
 	private Float result;
 	
-	@JsonIgnore
 	@ManyToOne
     @JoinColumn(name="subject_id")
 	private Subject subject;
 	
 	
-	@JsonIgnore
 	@ManyToOne
     @JoinColumn(name="user_id")
 	private User user;

@@ -59,9 +59,11 @@ public class UserDeserializer  extends StdDeserializer<User>{
 		String name = (String)(node.get("name")).asText();
 		String surname = (String)(node.get("surname")).asText();
 
-		String course;
+		String course=null;
+		if(node.has("course")) {
 		if(node.get("course").isNull()) { course=null;}
 		else {course = (String)(node.get("course")).asText();}
+		}
 		
 		String role = (String)(node.get("role")).asText();
 		Role roleObject=new Role();

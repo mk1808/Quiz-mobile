@@ -56,26 +56,37 @@ public class SubjectDeserializer  extends StdDeserializer<Subject> {
 		
 		String name = (String)(node.get("name")).asText();
 		
-		String course;
+		String course=null;
+		if(node.has("course")) {
 		if(node.get("course").isNull()) { course=null;}
-		else {course = (String)(node.get("course")).asText();}
+		else {
+			course = (String)(node.get("course")).asText();
+			}
+		}
 		
-		String description;
+		
+		String description=null;
+		if(node.has("description")) {
 		if(node.get("description").isNull()) {description=null;}
-		else {description= (String)(node.get("description")).asText();}
+		else {
+			description= (String)(node.get("description")).asText();
+			}
+		}
 		
 		String subject = (String)(node.get("subject")).asText();
 		
 		Long noQuestions=null;
+		if(node.has("noQuestions")) { 
 		if(node.get("noQuestions").isNull()) {}
 		else 
 			{
 				if(node.get("noQuestions").canConvertToInt())
 				noQuestions = (Long)((IntNode)node.get("noQuestions")).longValue();
 			}
-		
+		}
 		
 		Long time=null;
+		if(node.has("time")) {
 		if(node.get("time").isNull()) {	}
 		else 
 			{
@@ -83,6 +94,7 @@ public class SubjectDeserializer  extends StdDeserializer<Subject> {
 			    time=(Long)((IntNode)node.get("time")).longValue();
 				
 			}
+		}
 		
 		Boolean multipleChoice=false;
 		if(node.get("multipleChoice").isBoolean())
@@ -95,11 +107,13 @@ public class SubjectDeserializer  extends StdDeserializer<Subject> {
 		
 
 		Boolean canBack=null;
+		if(node.has("canBack")) {
 		if(node.get("canBack").isNull()) {}
 		else {
 			if(node.get("canBack").isBoolean())
 			canBack = (Boolean)((BooleanNode)node.get("canBack")).asBoolean();
 
+		}
 		}
 
 		Boolean limitedTime=false;
