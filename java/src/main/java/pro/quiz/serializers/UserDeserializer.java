@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -23,6 +24,8 @@ import pro.quiz.models.UserResult;
 import pro.quiz.repositories.RoleRepository;
 import pro.quiz.services.RoleService;
 
+
+@Component
 public class UserDeserializer  extends StdDeserializer<User>{
 
 	
@@ -69,9 +72,9 @@ public class UserDeserializer  extends StdDeserializer<User>{
 	    			roleObject = roleService.findByNameNotOptional(RoleName.ROLE_ADMIN);
 	    			break;
 	    		
-	    		default:
-	    			roleObject = roleService.findByNameNotOptional(RoleName.ROLE_ADMIN);
-
+	    		case "user":
+	    			roleObject = roleService.findByNameNotOptional(RoleName.ROLE_USER);
+	    			break;
 				}
 		
 				List <Subject> subjects= new ArrayList<Subject>();
