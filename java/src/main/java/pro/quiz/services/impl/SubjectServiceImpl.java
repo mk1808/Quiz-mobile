@@ -60,7 +60,8 @@ public class SubjectServiceImpl implements SubjectService{
 	}
 	
 	public List<Subject> getSubjectsByCourse(String course){
-		return this.subjectRepository.getSubjectsByCourse(course);
+		List<Subject> subjects=this.subjectRepository.getSubjectsByCourse(course);
+		return subjects;
 	}
 	
 	public List<Subject> getSubjectsByUser(User user){

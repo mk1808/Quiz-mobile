@@ -159,6 +159,8 @@ private final AnswerRepository answerRepository;
 		
 		List<Subject> subjects=new ArrayList<Subject>();
 		subjects=this.subjectService.getSubjectsByCourse(course);
+		
+
 		return  ResponseEntity.status(HttpStatus.OK).body(subjects);
 	 
 	}
