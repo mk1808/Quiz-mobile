@@ -81,6 +81,7 @@ public class UserDeserializer  extends StdDeserializer<User>{
 				
 				List <UserResult> results= new ArrayList<UserResult>();
 				
+				if(node.has("userResults")) {
 				final JsonNode arrNode=new ObjectMapper().readTree(node.toString()).get("userResults");
 				if(arrNode.isArray()) {
 					for(final JsonNode objectNode:arrNode) {
@@ -89,7 +90,7 @@ public class UserDeserializer  extends StdDeserializer<User>{
 						results.add(userResult);
 					}
 				}
-				
+				}
 				return new User(Long.valueOf(id),email,username,password, 
 						roleObject,name,surname,course,subjects,results);
 				
