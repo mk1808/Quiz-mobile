@@ -55,13 +55,13 @@ public class QuestionDeserializer extends StdDeserializer<Question>{
 		
 
 		String code=null;
-		if(node.has("image")&&node.get("image")!=null) {
+		if(node.has("code")&&node.get("code")!=null) {
 		if(node.get("code").isNull()) { code=null;}
 		else {code = (String)(node.get("code")).asText();}
 		}
 		
 		String image=null;
-		if(node.has("image")&&node.get("image")!=null) {
+		if(node.has("image")) {
 		if(node.get("image").isNull()) { image=null;}
 		else {image = (String)(node.get("image")).asText();}
 		}
