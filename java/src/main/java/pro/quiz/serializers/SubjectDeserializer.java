@@ -47,8 +47,10 @@ public class SubjectDeserializer  extends StdDeserializer<Subject> {
 		JsonNode node=jp.getCodec().readTree(jp);
 		ObjectMapper jsonObjectMapper=new ObjectMapper();
 		int id=-1;
+		if(node.has("id")) {
 		if (node.get("id").canConvertToInt())
 		id = (Integer)((IntNode)node.get("id")).intValue();
+		}
 		
 		int user=1;
 		if(node.get("idUser").canConvertToInt())
