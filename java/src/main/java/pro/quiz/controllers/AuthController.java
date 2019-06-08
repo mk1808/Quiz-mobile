@@ -76,7 +76,7 @@ public class AuthController {
 	    }
 
 	    @PostMapping("/signup")
-	    public ResponseEntity<String> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
+	    public ResponseEntity registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
 	        if(userService.existsByUsername(signUpRequest.getUsername())) {
 	            return new ResponseEntity<String>("Fail -> Username is already taken!",
 	                    HttpStatus.BAD_REQUEST);
@@ -118,7 +118,19 @@ public class AuthController {
 	        
 	       // user.setRole(role);
 	        userRepository.save(user);
-
-	        return ResponseEntity.ok().body("User registered successfully!");
+	        MyMessage msg=new MyMessage("User registeres successfully");
+	        return ResponseEntity.status(HttpStatus.OK).body(msg);
 	    }
+	    
+	    
+
+
+public class MyMessage{
+	public String message;
+	public MyMessage() {}
+	public MyMessage(String msg) {
+		this.message=msg;
+	};
+	
+}
 }
