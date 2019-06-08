@@ -55,15 +55,16 @@ public class QuestionDeserializer extends StdDeserializer<Question>{
 		
 
 		String code=null;
+		if(node.has("image")&&node.get("image")!=null) {
 		if(node.get("code").isNull()) { code=null;}
 		else {code = (String)(node.get("code")).asText();}
+		}
 		
-		
-
 		String image=null;
+		if(node.has("image")&&node.get("image")!=null) {
 		if(node.get("image").isNull()) { image=null;}
 		else {image = (String)(node.get("image")).asText();}
-		
+		}
 		List <Answer> answers= new ArrayList<Answer>();
 				
 		final JsonNode arrNode=new ObjectMapper().readTree(node.toString()).get("answers");
