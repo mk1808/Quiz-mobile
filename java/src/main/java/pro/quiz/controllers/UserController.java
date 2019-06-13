@@ -50,7 +50,16 @@ private final UserService userService;
 	}
 	
 	/////admin
+	@PreAuthorize("hasRole('ADMIN')")
+	@PutMapping("/admin/update")
+	ResponseEntity updateUserByAdmin(@RequestBody User user) {
+		
 	
+		
+			User myUser = this.userService.updateUserByAdmin(user);
+			return ResponseEntity.status(HttpStatus.OK).body(myUser);
+		
+	}
 	
 	
 }

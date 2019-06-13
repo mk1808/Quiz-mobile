@@ -81,5 +81,18 @@ public class UserServiceImpl implements UserService{
 		return partUser; 
 	}
 	
+	@Override
+	public User updateUserByAdmin(User user) {
+	User myUser=this.userRepository.findById(user.getId()).get();
+		myUser.setName(user.getName());
+		myUser.setSurname(user.getSurname());
+		myUser.setCourse(user.getCourse());
+		Role role=user.getRole();
+		myUser.setRole(role);
+		this.userRepository.save(myUser);
+		myUser.setPassword("");
+		return myUser; 
+	}
+	
 }
 
