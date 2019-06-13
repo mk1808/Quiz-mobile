@@ -83,4 +83,25 @@ public class SubjectServiceImpl implements SubjectService{
 		public Float result;
 		
 	}
+	
+	public Subject updateSubject(Subject subject) {
+		Subject mySubject=this.subjectRepository.findById(subject.getId()).get();
+		mySubject.setCanBack(subject.getCanBack());
+		mySubject.setCourse(subject.getCourse());
+		mySubject.setDescription(subject.getDescription());
+		mySubject.setLimitedTime(subject.getLimitedTime());
+		mySubject.setMultipleChoice(subject.getMultipleChoice());
+		mySubject.setName(subject.getName());
+		mySubject.setRandomize(subject.getRandomize());
+		mySubject.setSeparatePage(subject.getSeparatePage());
+		mySubject.setSubject(subject.getSubject());
+		mySubject.setTime(subject.getTime());
+		
+		
+		
+		
+		return this.subjectRepository.save(mySubject);
+		
+	}
+
 }

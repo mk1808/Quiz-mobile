@@ -128,6 +128,7 @@ public class SubjectDeserializer  extends StdDeserializer<Subject> {
 
 		List <Question> questions= new ArrayList<Question>();
 		
+		if(node.has("questions")) {		
 		final JsonNode arrNode=new ObjectMapper().readTree(node.toString()).get("questions");
 		if(arrNode.isArray()) {
 			for(final JsonNode objectNode:arrNode) {
@@ -136,9 +137,11 @@ public class SubjectDeserializer  extends StdDeserializer<Subject> {
 				questions.add(question);
 			}
 		}
+	}
 		
 		List <UserResult> userResults= new ArrayList<UserResult>();
 		
+		if(node.has("userResults")) {	
 		final JsonNode arrNode2=new ObjectMapper().readTree(node.toString()).get("userResults");
 		if(arrNode2.isArray()) {
 			for(final JsonNode objectNode:arrNode2) {
@@ -147,7 +150,7 @@ public class SubjectDeserializer  extends StdDeserializer<Subject> {
 				userResults.add(userResult);
 			}
 		}
-		
+		}
 
 		
 		User userObject = this.userService.getUserById(Long.valueOf(user));

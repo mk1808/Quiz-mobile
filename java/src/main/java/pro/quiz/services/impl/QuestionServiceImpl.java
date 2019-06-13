@@ -40,7 +40,6 @@ public class QuestionServiceImpl implements QuestionService{
 		
 	}
 	
-	@Override
 	public Question updateQuestion(Question question) {
 		Question myQuestion=this.questionRepository.findById(question.getId()).get();
 		myQuestion.setImage(question.getImage());

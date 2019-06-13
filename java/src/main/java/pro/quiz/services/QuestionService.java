@@ -12,5 +12,5 @@ public interface QuestionService {
 	Question createQuestion(Question question);
 	Question getQuestionById(Long id);
 	String deleteQuestion(Long id);
-	public Question updateQuestion(Question question);
+	Question updateQuestion(Question question);
 }
