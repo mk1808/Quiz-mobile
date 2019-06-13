@@ -1,11 +1,13 @@
 package pro.quiz.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +20,7 @@ import pro.quiz.models.Answer;
 import pro.quiz.models.Question;
 import pro.quiz.models.Subject;
 import pro.quiz.models.User;
+import pro.quiz.repositories.AnswerRepository;
 import pro.quiz.services.AnswerService;
 import pro.quiz.services.QuestionService;
 import pro.quiz.services.SubjectService;
@@ -30,11 +33,14 @@ public class QuestionController {
 private final QuestionService questionService;
 private final SubjectService subjectService;
 private final AnswerService answerService;	
+private final AnswerRepository answerRepository;
+
 	public QuestionController(QuestionService questionService, SubjectService subjectService,
-			AnswerService answerService) {
+			AnswerService answerService, AnswerRepository answerRepository) {
 		this.questionService=questionService;
 		this.subjectService=subjectService;
 		this.answerService=answerService;
+		this.answerRepository=answerRepository;
 }
 	
 
@@ -113,4 +119,29 @@ private final AnswerService answerService;
 			return ResponseEntity.status(HttpStatus.OK).body(myQuestion);
 		
 	}
+	
+	@PreAuthorize("hasRole('ADMIN')")
+	@DeleteMapping("/{id}")
+	ResponseEntity deleteQuestionById(@PathVariable Long id)  
+	{
+		
+		Question question=this.questionService.getQuestionById(id);
+		String response=new String();
+		if (question!=null) {
+		List <Answer> answers=this.answerRepository.getAnswersByQuestion(question);
+
+		
+		
+		for(Answer a:answers) {
+			this.answerService.deleteAnswer(a.getId());
+		};
+		
+		
+		response=this.questionService.deleteQuestion(id);
+		return  ResponseEntity.status(HttpStatus.OK).body(response);
+		}
+		else return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("nie znaleziono");
+	}
+
+	
 }
