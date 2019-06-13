@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import pro.quiz.models.Question;
 import pro.quiz.models.Subject;
+import pro.quiz.models.User;
 import pro.quiz.repositories.QuestionRepository;
 import pro.quiz.repositories.SubjectRepository;
 import pro.quiz.services.QuestionService;
@@ -38,5 +39,19 @@ public class QuestionServiceImpl implements QuestionService{
 		return "deleted";
 		
 	}
+	
+	@Override
+	public Question updateQuestion(Question question) {
+		Question myQuestion=this.questionRepository.findById(question.getId()).get();
+		myQuestion.setImage(question.getImage());
+		myQuestion.setText(question.getText());
+		myQuestion.setCode(question.getCode());
+		
+		myQuestion.setAnswers(question.getAnswers());
+	
+		return this.questionRepository.save(myQuestion);
+		
+	}
+
 	
 }

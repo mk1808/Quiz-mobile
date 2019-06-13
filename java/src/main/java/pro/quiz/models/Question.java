@@ -65,6 +65,17 @@ public class Question {
 		this.answers=answers;
 	}
 
+	public Question( Subject subject, @NotNull String text, String code, 
+			String image, List <Answer> answers ) {
+		super();
+		
+		this.subject = subject;
+		this.text = text;
+		this.code = code;
+		this.image = image;
+		this.answers=answers;
+	}
+
 	
 	public Long getId() {
 		return id;

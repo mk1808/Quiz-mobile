@@ -9,6 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pro.quiz.models.Answer;
 import pro.quiz.models.Question;
 import pro.quiz.models.Subject;
+import pro.quiz.models.User;
 import pro.quiz.services.AnswerService;
 import pro.quiz.services.QuestionService;
 import pro.quiz.services.SubjectService;
@@ -95,5 +97,20 @@ private final AnswerService answerService;
 			Result result = this.subjectService.checkAnswersForDemo(questions);
 			return ResponseEntity.status(HttpStatus.OK).body(result);
 		}
+	}
+	
+	
+	
+	@PreAuthorize("hasRole('ADMIN')")
+	@PutMapping("/update")
+	ResponseEntity updateQuestion(@RequestBody Question question) {
+		
+		for (Answer answer:question.getAnswers() ) {
+			answer.setQuestion(question);
+		}
+		
+			Question myQuestion = this.questionService.updateQuestion(question);
+			return ResponseEntity.status(HttpStatus.OK).body(myQuestion);
+		
 	}
 }

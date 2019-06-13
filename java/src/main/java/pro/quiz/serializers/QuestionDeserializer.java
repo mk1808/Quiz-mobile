@@ -68,7 +68,7 @@ public class QuestionDeserializer extends StdDeserializer<Question>{
 		else {image = (String)(node.get("image")).asText();}
 		}
 		List <Answer> answers= new ArrayList<Answer>();
-				
+		;
 		final JsonNode arrNode=new ObjectMapper().readTree(node.toString()).get("answers");
 		if(arrNode.isArray()) {
 			for(final JsonNode objectNode:arrNode) {
