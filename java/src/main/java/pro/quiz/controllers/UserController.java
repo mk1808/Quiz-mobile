@@ -94,4 +94,13 @@ private final UserResultRepository userResultRepository;
 		}
 		else return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("nie znaleziono");
 	}
+	
+	@PreAuthorize("hasRole('ADMIN')")
+	@GetMapping("")
+	ResponseEntity getUsers() {
+			
+			List <User> myUsers = this.userService.getUsers();
+			return ResponseEntity.status(HttpStatus.OK).body(myUsers);
+		
+	}
 }
