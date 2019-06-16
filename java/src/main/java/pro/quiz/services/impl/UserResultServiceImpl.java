@@ -13,4 +13,10 @@ public class UserResultServiceImpl implements UserResultService{
 	{
 		this.userResultRepository=userResultRepository;
 	}
+	
+	public String deleteUserResult(Long id) 
+	{
+		this.userResultRepository.deleteById(id);
+		return "deleted";
+	}
 }
