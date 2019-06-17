@@ -117,8 +117,9 @@ public class AuthController {
 	                );
 	        
 	       // user.setRole(role);
-	        userRepository.save(user);
-	        MyMessage msg=new MyMessage("User registeres successfully");
+	        User newUser=userRepository.save(user);
+	        Long id=newUser.getId();
+	        MyMessage msg=new MyMessage("User registered successfully", id);
 	        return ResponseEntity.status(HttpStatus.OK).body(msg);
 	    }
 	    
@@ -127,9 +128,11 @@ public class AuthController {
 
 public class MyMessage{
 	public String message;
+	public Long id;
 	public MyMessage() {}
-	public MyMessage(String msg) {
+	public MyMessage(String msg, Long id) {
 		this.message=msg;
+		this.id=id;
 	};
 	
 }
