@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import pro.quiz.models.Answer;
@@ -40,7 +41,7 @@ private final UserResultRepository userResultRepository;
 		this.userResultService=userResultService;
 }
 	
-	@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasRole('USER')  OR hasRole('ADMIN')")
 	@PutMapping("/update")
 	ResponseEntity updateUser(@RequestBody User user) {
 		
@@ -100,6 +101,23 @@ private final UserResultRepository userResultRepository;
 	ResponseEntity getUsers() {
 			
 			List <User> myUsers = this.userService.getUsers();
+			return ResponseEntity.status(HttpStatus.OK).body(myUsers);
+		
+	}
+	
+	@PreAuthorize("hasRole('ADMIN')")
+	@GetMapping("/all")
+	ResponseEntity getFilteredUsers( 
+			@RequestParam(value = "email", required = false) String email,
+			@RequestParam(value = "username", required = false) String username,
+			@RequestParam(value = "name", required = false) String name,
+			@RequestParam(value = "surname", required = false) String surname,
+			@RequestParam(value = "course", required = false) String course
+			)
+	{
+			
+			List <User> myUsers = this.userService.findByEmailOrUsernameOrNameOrSurname
+					(email, username, name, surname);
 			return ResponseEntity.status(HttpStatus.OK).body(myUsers);
 		
 	}

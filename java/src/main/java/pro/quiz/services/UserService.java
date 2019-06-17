@@ -18,6 +18,7 @@ public interface UserService {
 	User updateUser(User user);
 	User updateUserByAdmin(User user);
 	String deleteUser(Long id); 
-	
+	List<User> findByEmailOrUsernameOrNameOrSurname(
+		String emali, String username, String name, String surname);
 
 }

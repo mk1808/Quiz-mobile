@@ -101,5 +101,18 @@ public class UserServiceImpl implements UserService{
 		return "deleted";
 	}
 	
+	@Override
+	public List<User> findByEmailOrUsernameOrNameOrSurname(
+			String email, String username, String name, String surname)
+	{
+		/*
+		return this.userRepository
+				.findByEmailContainingAndUsernameContainingAndNameContainingAndSurnameContainingAndCourseContaining
+				(emali, username, name, surname, course);
+		*/
+		return this.userRepository.
+				findByEmailContainingAndUsernameContainingAndNameContainingAndSurnameContaining
+				(email, username, name, surname);
+	}
 }
 
