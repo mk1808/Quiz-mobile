@@ -33,7 +33,7 @@ public class SubjectSerializer extends StdSerializer<Subject> {
 		if(value.getNoQuestions()==null) {
 			jgen.writeNullField("noQuestions");
 		}else {
-		
+		value.setNoQuestions(Long.valueOf(value.getQuestions().size()));
 		jgen.writeNumberField("noQuestions", value.getNoQuestions());
 		}
 		jgen.writeBooleanField("multipleChoice", value.getMultipleChoice());
